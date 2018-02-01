@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>
+        {%block title%}
+        {%endblock%}
+    </title>
+
+    <style type="text/css">
+        @page {
+            size: letter;
+            {% include 'pdf/portrait.css' %}
+        }
+    </style>
+</head>
+<body>
+
+
+
+<body>
+
+    <!--&lt;!&ndash; Content for Static Frame 'header_frame' &ndash;&gt;-->
+    <!--<div id="header_content" style="">-->
+            <!--&lt;!&ndash;<img src="http://127.0.0.1:8000/media/fotos/pan.jpeg" alt="prat_logo.png" style="height: 50px;width: auto"/>&ndash;&gt;-->
+            <!--<p style="font-size: 8px;text-align:right;">-->
+                <!--Forn i Pastisseria Prat <br>-->
+                <!--Pla&#231a Major, 9 Mollet del Vall&egraves <br>-->
+                <!--Tel. 935 700 162 <br>-->
+                <!--www.fornipastisseriaprat.com <br>-->
+                <!--info@fornipastisseriaprat.com <br>-->
+                <!--&lt;!&ndash;<img src="http://127.0.0.1:8000/media/fotos/pan.jpeg" alt="prat_logo.png" style="height: 50px;width: auto"/>&ndash;&gt;-->
+            <!--</p>-->
+    <!--</div>-->
+
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content" style="">
+        <table style="border: 0px;">
+            <tr>
+                <td>
+                    <img src="http://127.0.0.1:8000/media/prat_logo_blanco.jpg" style="height: 50px;width: auto"/>
+                </td>
+                <td style="text-align:right;font-size: 8px">
+                    Forn i Pastisseria Prat <br>
+                    Pla&#231a Major, 9 Mollet del Vall&egraves <br>
+                    Tel. 935 700 162 <br>
+                    www.fornipastisseriaprat.com <br>
+                    info@fornipastisseriaprat.com <br>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content" >
+        <p align="center" style="margin-bottom: 28px;font-family:">Cada nit enfarinem l&#8217;obrador</p>
+        <p style="text-align:right"> <pdf:pagenumber /> de <pdf:pagecount /> </p>
+    </div>
+
+    {%block content%}
+    {%endblock%}
+</body>
+
+
+</body>
+</html>
