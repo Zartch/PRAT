@@ -56,9 +56,10 @@ def get_productes_context(familia = None):
     cat = Categoria.objects.all()
 
     for f in familia:
-        for c in cat:
-            productes[c] = Producte.objects.filter(familia=f, categoria=c)
-
+         for c in cat:
+            productes_a_categoria = Producte.objects.filter(familia=f, categoria=c)
+            if productes_a_categoria.count() > 0:
+                productes[c] = productes_a_categoria
     context =  {'productes':productes}
 
     return context
@@ -121,7 +122,6 @@ def upload_csv(request):
 
             categories = data_dict["categoria"].split(",")
             for categoria in categories:
-                #comprobem si la familia existeix y si no la creem:
                 cat, created = Categoria.objects.get_or_create(nom = categoria)
                 if not cat in prod.categoria.all():
                     prod.categoria.add(cat)

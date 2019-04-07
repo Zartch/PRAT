@@ -42,6 +42,8 @@
        border: 1px solid black;
     }
     p.separator { -pdf-keep-with-next: false; font-size: 6pt; }
+
+
 </style>
 
 
@@ -75,10 +77,10 @@
                 {% endif %}
 
                    <td class="border" style="text-align: center;padding-top:2px">
-                        <p>[{{ p.id }}]
+                        <p>[{{ p.codi }}]
                         {{ p.nom }}
                         {{ p.preu }}€</p>
-                        <img style="height: 155px;width: auto" src="http://127.0.0.1:8000/media/fotos/pan.jpeg"/>
+                        <img class="img_rotate" style="height: 155px;width: auto" src="http://127.0.0.1:8000/media/Mones2019/{{p.codi}}.JPG"/>
                     </td>
                 {% if forloop.counter0|divisibleby:2  == False%}
                     </tr >
