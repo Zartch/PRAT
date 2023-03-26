@@ -70,17 +70,73 @@ def upload_csv(request):
 
     try:
         csv_file = request.FILES["csv_file"]
-        # if not csv_file.name.endswith('.csv'):
-        #     return render(request, "upload_csv.html", data)
-        # # if file is too large, return
-        # if csv_file.multiple_chunks():
-        #     return render(request, "upload_csv.html", data)
+        import csv
+
+        def decode_utf8(input_iterator):
+            for l in input_iterator:
+                yield l.decode('utf-8')
+
+        # reader = csv.DictReader(decode_utf8(request.FILES['csv_file']), delimiter=';')
+        # reader = csv.DictReader(request.FILES['csv_file'])
+
+        import chardet
+
+        # Detectar la codificación del archivo
+        file_content = request.FILES['csv_file'].read()
+        detected_encoding = chardet.detect(file_content)['encoding']
+        print(detected_encoding)
+
+        # Decodificar el contenido del archivo
+        decoded_content = file_content.decode(detected_encoding)
+
+        # Leer el archivo decodificado como un archivo StringIO
+        from io import StringIO
+        file_io = StringIO(decoded_content)
+
+        reader = csv.DictReader(file_io, delimiter=';')
+
+
+        for data_dict in reader:
+            print(data_dict)
+            # Recuperamos el producto por el codigo, si no lo creamos
+            try:
+                prod = Producte.objects.get(codi=data_dict["CODI"])
+                # actualitzem les dades:
+                prod.preu = data_dict["PREU"]
+                prod.unitat = data_dict["unitatMesura"]
+                prod.descripcio = data_dict["Descripcio"]
+
+            except ObjectDoesNotExist:
+                prod = Producte.objects.create(codi=data_dict["CODI"],
+                                               nom=data_dict["NOM"],
+                                               preu=data_dict["PREU"],
+                                               unitat=data_dict["unitatMesura"],
+                                               descripcio=data_dict["Descripcio"])
+
+            # controlem les families y les categories
+            families = data_dict["FAMILIA"].split(",")
+            for familia in families:
+                # comprobem si la familia existeix y si no la creem:
+                fam, created = Familia.objects.get_or_create(nom=familia)
+                if not fam in prod.familia.all():
+                    prod.familia.add(fam)
+
+            categories = data_dict["CATEGORIA"].split(",")
+            for categoria in categories:
+                cat, created = Categoria.objects.get_or_create(nom=categoria)
+                if not cat in prod.categoria.all():
+                    prod.categoria.add(cat)
+
+            prod.save()
+            print(prod)
+
 
         file_data = csv_file.read().decode("utf-8")
 
         lines = file_data.split("\n")
         # loop over the lines and save them in db. If error , store as string and then display
         for line in lines:
+            print(line)
             fields = line.split(";")
             data_dict = {}
             #saltar la primera linea si es el titulo o si son lineas vacias:

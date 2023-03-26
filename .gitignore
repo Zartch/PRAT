@@ -1,0 +1,25 @@
+.idea
+media/Mones*
+
+
+# Ignora los archivos de configuración de Django
+*.pyc
+*.pyo
+__pycache__/
+*.sqlite3
+
+# Ignora los archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Ignora el directorio de entorno virtual
+venv/
+
+# Ignora el archivo de dependencias
+pip-lock.txt
+
+# Ignora los archivos de registro
+*.log
+
+# Ignora cualquier archivo con información sensible
+secrets.json
