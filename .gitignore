@@ -23,3 +23,18 @@ pip-lock.txt
 
 # Ignora cualquier archivo con información sensible
 secrets.json
+
+# PyInstaller
+build/
+dist/
+*.spec.bak
+
+# Base de datos de la aplicación
+prat.db
+
+# Configuración local
+prat_config.json
+
+# Fotos de productos (excepto ejemplos)
+media/fotos/*
+!media/fotos/.gitkeep
