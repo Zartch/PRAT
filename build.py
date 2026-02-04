@@ -1,16 +1,28 @@
 #!/usr/bin/env python3
 """
 Script de construcción para PRAT
-Genera el ejecutable Windows usando PyInstaller
+Genera el ejecutable para Windows o Linux usando PyInstaller
 """
 
 import os
 import sys
+import platform
 import shutil
 import subprocess
 
 # Directorio base
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Detectar plataforma
+IS_WINDOWS = platform.system() == 'Windows'
+IS_LINUX = platform.system() == 'Linux'
+IS_MAC = platform.system() == 'Darwin'
+
+# Nombre del ejecutable según plataforma
+if IS_WINDOWS:
+    EXE_NAME = 'PRAT.exe'
+else:
+    EXE_NAME = 'PRAT'
 
 
 def clean_build():
@@ -50,8 +62,9 @@ def check_dependencies():
 
 def build_exe():
     """Construir el ejecutable"""
+    platform_name = platform.system()
     print("\n" + "="*50)
-    print("Construyendo PRAT.exe...")
+    print(f"Construyendo PRAT para {platform_name}...")
     print("="*50 + "\n")
 
     # Comando PyInstaller
@@ -65,11 +78,12 @@ def build_exe():
     result = subprocess.run(cmd, cwd=BASE_DIR)
 
     if result.returncode == 0:
-        exe_path = os.path.join(BASE_DIR, 'dist', 'PRAT.exe')
+        exe_path = os.path.join(BASE_DIR, 'dist', EXE_NAME)
         if os.path.exists(exe_path):
             size_mb = os.path.getsize(exe_path) / (1024 * 1024)
             print("\n" + "="*50)
             print(f"✓ Ejecutable creado exitosamente!")
+            print(f"  Plataforma: {platform_name}")
             print(f"  Ubicación: {exe_path}")
             print(f"  Tamaño: {size_mb:.1f} MB")
             print("="*50)
@@ -83,6 +97,7 @@ def main():
     """Función principal"""
     print("="*50)
     print("PRAT - Constructor de Ejecutable")
+    print(f"Plataforma detectada: {platform.system()}")
     print("="*50)
 
     # Verificar dependencias
@@ -96,7 +111,7 @@ def main():
     # Construir
     if build_exe():
         print("\n¡Proceso completado!")
-        print("El ejecutable se encuentra en: dist/PRAT.exe")
+        print(f"El ejecutable se encuentra en: dist/{EXE_NAME}")
     else:
         print("\nEl proceso falló. Revisa los errores anteriores.")
         sys.exit(1)

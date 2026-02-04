@@ -9,7 +9,7 @@ Aplicación de escritorio para generar catálogos en PDF desde archivos CSV y fo
 - **Importación CSV**: Carga productos desde archivos CSV con detección automática de codificación
 - **Catálogo visual**: Visualiza productos organizados por categoría y familia
 - **Generación PDF**: Crea catálogos profesionales en PDF con fotos
-- **Ejecutable Windows**: Funciona sin necesidad de instalar Python
+- **Multiplataforma**: Ejecutables para Windows y Linux sin necesidad de instalar Python
 
 ## Requerimientos
 
@@ -22,7 +22,8 @@ Aplicación de escritorio para generar catálogos en PDF desde archivos CSV y fo
 - chardet
 
 ### Para usuarios
-- Windows 10/11 (ejecutable .exe)
+- Windows 10/11 (ejecutable `.exe`)
+- Linux (ejecutable binario)
 
 ## Instalación (Desarrollo)
 
@@ -47,11 +48,15 @@ pip install -r requirements.txt
 python run.py
 ```
 
-### Crear ejecutable Windows
+### Crear ejecutable (Windows/Linux)
 ```bash
 python build.py
 ```
-El ejecutable se generará en `dist/PRAT.exe`
+El ejecutable se generará en:
+- **Windows**: `dist/PRAT.exe`
+- **Linux**: `dist/PRAT`
+
+El script detecta automáticamente la plataforma y genera el ejecutable correspondiente.
 
 ## Formato CSV
 
