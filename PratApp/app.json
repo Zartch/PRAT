@@ -1,0 +1,53 @@
+{
+  "expo": {
+    "name": "PRAT - Catàleg de Productes",
+    "slug": "prat-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/prat_logo.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/prat_logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#8B4513"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.prat.cataleg",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Necessitem accés a la càmera per fotografiar productes",
+        "NSPhotoLibraryUsageDescription": "Necessitem accés a la galeria per guardar fotos de productes"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/prat_logo.png",
+        "backgroundColor": "#8B4513"
+      },
+      "package": "com.prat.cataleg",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Permetre accés a la càmera per fotografiar productes"
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Permetre accés a la galeria per guardar fotos de productes",
+          "savePhotosPermission": "Permetre guardar fotos de productes a la galeria"
+        }
+      ]
+    ]
+  }
+}
