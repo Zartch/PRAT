@@ -10,3 +10,17 @@ npm-debug.*
 *.orig.*
 web-build/
 .env
+
+# Legacy Python/Django project files (kept on master branch)
+PRAT/
+PratApp/
+app/
+build.py
+manage.py
+media/
+prat.spec
+productos/
+readme.md
+requirements.txt
+run.py
+templates/
